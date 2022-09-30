@@ -11,15 +11,23 @@ export const postReducer = createSlice({
       state.list = action.payload;
     },
     getPost: (state, action) => {
-        console.log("action",action.payload);
+      console.log("action", action.payload);
       let startNum = action.payload;
       let endNum = action.payload + 1;
       for (let i = startNum; i <= endNum; i++) {
-        console.log(i,"fromloop",state.list[i]);
         state.posts.push(state.list[i]);
       }
     },
+
+    deletePost: (state, action) => {
+      console.log("grom ");
+      state.posts = state.posts.filter((element) => {
+        if (element.id !== action.payload) {
+            return element;
+        }
+      });
+    },
   },
 });
-export const { savePosts, getPost } = postReducer.actions;
+export const { savePosts, getPost, deletePost } = postReducer.actions;
 export default postReducer.reducer;

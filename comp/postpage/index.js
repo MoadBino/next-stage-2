@@ -1,24 +1,25 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { getPost } from "../../redux/reducer/posts";
 import { useSelector, useDispatch } from "react-redux";
+import { deletePost } from "../../redux/reducer/posts";
 const Post = () => {
-    const isMounted = useRef(false);
+  const isMounted = useRef(false);
   const Dispatch = useDispatch();
   const [num, setNum] = useState(0);
-  let render = true;
   const state = useSelector((state) => {
     return {
       post: state.post.posts,
+      id: state.users.id,
     };
   });
-
+  console.log(22222, state.post);
   useEffect(() => {
     if (isMounted.current) {
-        Dispatch(getPost(num));
-      } else {
-        isMounted.current = true;
-      }
+      Dispatch(getPost(num));
+    } else {
+      isMounted.current = true;
+    }
   }, [num]);
   return (
     <ScrollView>
@@ -26,7 +27,6 @@ const Post = () => {
         <Text>hello from post page </Text>
         {state.post &&
           state.post.map((element, index) => {
-            console.log(element);
             return (
               <View key={index} style={styles.container}>
                 <Text
@@ -40,9 +40,18 @@ const Post = () => {
                   {element.title}
                 </Text>
                 <Text style={{ width: 300, marginBottom: 10 }}>
-                  {" "}
                   {element.body}
                 </Text>
+                {element.userId == state.id ? (
+                  <Button
+                    title="remove"
+                    onPress={() => {
+                      Dispatch(deletePost(element.id));
+                    }}
+                  />
+                ) : (
+                  ""
+                )}
               </View>
             );
           })}

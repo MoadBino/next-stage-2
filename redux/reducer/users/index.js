@@ -3,13 +3,24 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
+    isLogin: false,
+    id: "",
   },
   reducers: {
     saveUsers: (state, action) => {
       state.users = action.payload;
     },
+    isLogin: (state, action) => {
+      state.isLogin = true;
+      state.id = action.payload;
+    },
+    logout:(state,action)=>{
+      console.log("fromlogout");
+      state.isLogin = false;
+      state.id = "";
+    }
   },
 });
 
-export const { saveUsers } = usersSlice.actions;
+export const { saveUsers, isLogin,logout } = usersSlice.actions;
 export default usersSlice.reducer;

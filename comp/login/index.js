@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { isLogin } from "../../redux/reducer/users";
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const Dispatch = useDispatch();
+  const navigation = useNavigation();
+  const [username, setUsername] = useState("Bret");
+  const [email, setEmail] = useState("Sincere@april.biz");
   const state = useSelector((state) => {
     return {
       users: state.users.users,
     };
   });
   const login = (username, email) => {
-    console.log(false);
     state.users &&
       state.users.forEach((element) => {
         if (element.username === username && element.email === email) {
-          console.log(true);
+          Dispatch(isLogin(element.id));
+          navigation.navigate("Post");
+          //Bret Sincere@april.biz
         }
       });
   };
