@@ -15,7 +15,7 @@ export const usersSlice = createSlice({
       state.id = action.payload;
     },
     logout:(state,action)=>{
-      console.log("fromlogout");
+
       state.isLogin = false;
       state.id = "";
     }

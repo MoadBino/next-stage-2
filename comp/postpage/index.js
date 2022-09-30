@@ -3,17 +3,19 @@ import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { getPost } from "../../redux/reducer/posts";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../../redux/reducer/posts";
+import UpdateModal from "../modal/update/update";
 const Post = () => {
   const isMounted = useRef(false);
   const Dispatch = useDispatch();
   const [num, setNum] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState("")
   const state = useSelector((state) => {
     return {
       post: state.post.posts,
       id: state.users.id,
     };
   });
-  console.log(22222, state.post);
   useEffect(() => {
     if (isMounted.current) {
       Dispatch(getPost(num));
@@ -21,6 +23,7 @@ const Post = () => {
       isMounted.current = true;
     }
   }, [num]);
+
   return (
     <ScrollView>
       <View>
@@ -43,12 +46,21 @@ const Post = () => {
                   {element.body}
                 </Text>
                 {element.userId == state.id ? (
-                  <Button
-                    title="remove"
-                    onPress={() => {
-                      Dispatch(deletePost(element.id));
-                    }}
-                  />
+                  <View>
+                    <Button
+                      title="remove"
+                      onPress={() => {
+                        Dispatch(deletePost(element.id));
+                      }}
+                    />
+                    <Button
+                      title="update"
+                      onPress={() => {
+                        setOpen(true);
+                        setId(element.id)
+                      }}
+                    />
+                  </View>
                 ) : (
                   ""
                 )}
@@ -66,6 +78,7 @@ const Post = () => {
       ) : (
         ""
       )}
+      <UpdateModal open={open} id={id} setOpen={setOpen} />
     </ScrollView>
   );
 };
@@ -76,7 +89,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     marginBottom: 10,
     backgroundColor: "#EBF1F2",
-    height: 250,
+    height: 350,
   },
 });
 export default Post;
