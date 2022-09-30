@@ -22,8 +22,9 @@ const Login = () => {
   };
   return (
     <View style={styles.container}>
-      <TextInput placeholder="username"
-              onChangeText={(newText) => setUsername(newText)}
+      <TextInput
+        placeholder="username"
+        onChangeText={(newText) => setUsername(newText)}
       ></TextInput>
       <TextInput
         placeholder="email"
@@ -35,7 +36,7 @@ const Login = () => {
           login(username, email);
         }}
       />
-      
+
       <StatusBar style="auto" />
     </View>
   );
