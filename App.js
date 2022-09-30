@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,ScrollView } from "react-native";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Login from "./comp/login";
@@ -10,19 +10,21 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const stack = createNativeStackNavigator();
 export default function App() {
   return (
+
     <Provider store={store}>
       <Data />
       <NavigationContainer>
-        <Navbar />
         <stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
+          // screenOptions={{
+          //     headerShown: false,
+          // }}
         >
           <stack.Screen name="login" component={Login} />
           <stack.Screen name="Post" component={Post} />
         </stack.Navigator>
+            <Navbar />
       </NavigationContainer>
     </Provider>
+
   );
 }
