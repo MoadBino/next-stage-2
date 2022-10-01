@@ -50,7 +50,9 @@ const AddPost = ({ openAdd, setOpenAdd, userId }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={{ borderRadius: 10 }}>
+            <Text style={{textAlign:"left" ,width:200 ,fontSize:15,marginBottom:5}}>body</Text>
               {input("body", setBody)}
+              <Text style={{textAlign:"left" ,width:200 ,fontSize:15,marginBottom:5}}>title</Text>
               {input("title", setTitle)}
             </View>
             <View style={styles.buttons}>
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
-    height: 200,
+    height: 270,
 
     shadowOffset: {
       width: 0,
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     elevation: 2,
     marginBottom: 10,
     marginTop: 10,
@@ -132,14 +134,14 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
     width: 80,
-    height: 50,
+    height: 41,
   },
   buttons: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: 210,
-    height: 300,
+
   },
 });
 

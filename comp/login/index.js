@@ -9,8 +9,8 @@ import { getPost } from "../../redux/reducer/posts";
 const Login = () => {
   const Dispatch = useDispatch();
   const navigation = useNavigation();
-  const [username, setUsername] = useState("Bret");
-  const [email, setEmail] = useState("Sincere@april.biz");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const state = useSelector((state) => {
     return {
       users: state.users.users,

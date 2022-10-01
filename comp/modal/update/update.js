@@ -51,7 +51,9 @@ const UpdateModal = ({ open, id, setOpen }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <Text style={{textAlign:"left" ,width:200 ,fontSize:15,marginBottom:5}}>body</Text>
             {input("body", setBody)}
+            <Text style={{textAlign:"left" ,width:190 ,fontSize:15,marginBottom:5}}>title</Text>
             {input("title", setTitle)}
             <View style={styles.buttons}>
               <Pressable
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     padding: 35,
-    height: 200,
+    height: 270,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -107,15 +109,16 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     elevation: 2,
     marginBottom: 20,
+    
   },
 
   buttonClose: {
     backgroundColor: "#2196F3",
     width: 100,
-    height: 47,
+    height: 41,
   },
   textStyle: {
     color: "white",
@@ -131,8 +134,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: 220,
+    width: 230,
     height: 100,
+    marginTop:10
   },
 });
 
