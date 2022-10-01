@@ -33,7 +33,7 @@ const Navbar = () => {
           navigation.navigate("Post");
         }}
       >
-        <Text style={styles.text}>post</Text>
+        <Text style={styles.text}>Blogs</Text>
       </Pressable>
     </View>
   );

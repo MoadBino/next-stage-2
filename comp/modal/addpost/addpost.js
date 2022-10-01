@@ -66,7 +66,7 @@ const AddPost = ({ openAdd, setOpenAdd, userId }) => {
                   setModalVisible(!modalVisible);
                 }}
               >
-                <Text style={styles.textStyle}>update</Text>
+                <Text style={styles.textStyle}>Add Blog</Text>
               </Pressable>
               <Pressable
                 style={[styles.button, styles.buttonClose]}

@@ -35,7 +35,7 @@ const Post = () => {
       <View>
         <View style={{ marginBottom: 50 }}>
           <Button
-            title="ADD post"
+            title="ADD blog"
             onPress={() => {
               if (!state.id) {
                 navigation.navigate("login");
