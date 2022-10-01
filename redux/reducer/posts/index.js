@@ -11,9 +11,15 @@ export const postReducer = createSlice({
       state.list = action.payload;
     },
     getPost: (state, action) => {
-      let startNum = action.payload + 1;
-      let endNum = action.payload + 5;
+      if (action.payload.empty) {
+        state.posts = [];
+      }
+      let startNum = action.payload.num + 1;
+      let endNum = action.payload.num + 5;
       for (let i = startNum; i <= endNum; i++) {
+        if (!state.list[i]) {
+          return;
+        }
         state.posts.push(state.list[i]);
       }
     },

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { isLogin } from "../../redux/reducer/users";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { getPost } from "../../redux/reducer/posts";
 const Login = () => {
   const Dispatch = useDispatch();
   const navigation = useNavigation();
@@ -24,17 +25,35 @@ const Login = () => {
           //Bret Sincere@april.biz
         }
       });
+
   };
+
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="username"
-        onChangeText={(newText) => setUsername(newText)}
-      ></TextInput>
-      <TextInput
-        placeholder="email"
-        onChangeText={(newText) => setEmail(newText)}
-      ></TextInput>
+      <View>
+        <Text>username</Text>
+        <TextInput
+          style={{
+            borderWidth: 1,
+            width: 200,
+            textAlign: "center",
+            marginBottom: 20,
+          }}
+          placeholder="username"
+          onChangeText={(newText) => setUsername(newText)}
+        ></TextInput>
+        <Text>email</Text>
+        <TextInput
+          style={{
+            borderWidth: 1,
+            width: 200,
+            textAlign: "center",
+            marginBottom: 20,
+          }}
+          placeholder="email"
+          onChangeText={(newText) => setEmail(newText)}
+        ></TextInput>
+      </View>
       <Button
         title="login"
         onPress={() => {
@@ -48,6 +67,11 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 export default Login;

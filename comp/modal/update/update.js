@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
   buttonClose: {
     backgroundColor: "#2196F3",
-    width:150
+    width: 150,
   },
   textStyle: {
     color: "white",

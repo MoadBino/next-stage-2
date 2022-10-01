@@ -20,7 +20,7 @@ export default function Data() {
       .get("https://jsonplaceholder.typicode.com/posts")
       .then((result) => {
         Dispatch(savePosts(result.data));
-        Dispatch(getPost(-1));
+        Dispatch(getPost({num:-1,empty:false}));
       })
       .catch((err) => {
         console.log(err);

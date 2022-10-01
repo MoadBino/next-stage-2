@@ -20,8 +20,9 @@ const Post = () => {
   });
   useEffect(() => {
     if (isMounted.current) {
-      Dispatch(getPost(num));
+      Dispatch(getPost({num:num,empty:false}));
     } else {
+      Dispatch(getPost({num:-1,empty:true}));
       isMounted.current = true;
     }
   }, [num]);
@@ -29,16 +30,19 @@ const Post = () => {
   return (
     <ScrollView>
       <View>
-        <Text>hello from post page </Text>
-        <Button title="add post "
-        onPress={()=>{
-          setOpenAdd(true)
-        }}
-        />
+        <View style={{ marginBottom: 50 }}>
+          <Button
+
+            title="ADD post"
+            onPress={() => {
+              setOpenAdd(true);
+            }}
+          />
+        </View>
         {state.post &&
           state.post.map((element, index) => {
             return (
-              <View key={index} style={styles.container}>
+              <View key={index} style={styles.childcontainer}>
                 <Text
                   style={{
                     fontSize: 20,
@@ -79,7 +83,6 @@ const Post = () => {
         <Button
           onPress={() => {
             setNum(num + 5);
-            
           }}
           title="load more"
         />
@@ -92,13 +95,13 @@ const Post = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
+  childcontainer: {
     flex: 1,
+    flexDirection: "column",
     marginHorizontal: 16,
-    borderWidth: 4,
+    borderWidth: 1,
     marginBottom: 10,
-    backgroundColor: "#EBF1F2",
-    height: 350,
+    padding:10
   },
 });
 export default Post;
