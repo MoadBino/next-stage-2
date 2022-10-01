@@ -4,12 +4,14 @@ import { getPost } from "../../redux/reducer/posts";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../../redux/reducer/posts";
 import UpdateModal from "../modal/update/update";
+import AddPost from "../modal/addpost/addpost";
 const Post = () => {
   const isMounted = useRef(false);
   const Dispatch = useDispatch();
   const [num, setNum] = useState(0);
   const [open, setOpen] = useState(false);
-  const [id, setId] = useState("")
+  const [openAdd, setOpenAdd] = useState("");
+  const [id, setId] = useState("");
   const state = useSelector((state) => {
     return {
       post: state.post.posts,
@@ -28,6 +30,11 @@ const Post = () => {
     <ScrollView>
       <View>
         <Text>hello from post page </Text>
+        <Button title="add post "
+        onPress={()=>{
+          setOpenAdd(true)
+        }}
+        />
         {state.post &&
           state.post.map((element, index) => {
             return (
@@ -57,7 +64,7 @@ const Post = () => {
                       title="update"
                       onPress={() => {
                         setOpen(true);
-                        setId(element.id)
+                        setId(element.id);
                       }}
                     />
                   </View>
@@ -71,7 +78,8 @@ const Post = () => {
       {state.post.length > 0 ? (
         <Button
           onPress={() => {
-            setNum(num + 1);
+            setNum(num + 5);
+            
           }}
           title="load more"
         />
@@ -79,6 +87,7 @@ const Post = () => {
         ""
       )}
       <UpdateModal open={open} id={id} setOpen={setOpen} />
+      <AddPost openAdd={openAdd} setOpenAdd={setOpenAdd} userId={state.id} />
     </ScrollView>
   );
 };
