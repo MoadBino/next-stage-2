@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../../redux/reducer/posts";
 import UpdateModal from "../modal/update/update";
 import AddPost from "../modal/addpost/addpost";
+import { useNavigation } from "@react-navigation/native";
+
 const Post = () => {
+  const navigation = useNavigation();
   const isMounted = useRef(false);
   const Dispatch = useDispatch();
   const [num, setNum] = useState(0);
@@ -20,9 +23,9 @@ const Post = () => {
   });
   useEffect(() => {
     if (isMounted.current) {
-      Dispatch(getPost({num:num,empty:false}));
+      Dispatch(getPost({ num: num, empty: false }));
     } else {
-      Dispatch(getPost({num:-1,empty:true}));
+      Dispatch(getPost({ num: -1, empty: true }));
       isMounted.current = true;
     }
   }, [num]);
@@ -32,9 +35,11 @@ const Post = () => {
       <View>
         <View style={{ marginBottom: 50 }}>
           <Button
-
             title="ADD post"
             onPress={() => {
+              if (!state.id) {
+                navigation.navigate("login");
+              }
               setOpenAdd(true);
             }}
           />
@@ -57,7 +62,7 @@ const Post = () => {
                   {element.body}
                 </Text>
                 {element.userId == state.id ? (
-                  <View>
+                  <View style={styles.buttons}>
                     <Button
                       title="remove"
                       onPress={() => {
@@ -79,16 +84,14 @@ const Post = () => {
             );
           })}
       </View>
-      {state.post.length > 0 ? (
-        <Button
-          onPress={() => {
-            setNum(num + 5);
-          }}
-          title="load more"
-        />
-      ) : (
-        ""
-      )}
+
+      <Button
+        onPress={() => {
+          setNum(num + 5);
+        }}
+        title="load more"
+      />
+
       <UpdateModal open={open} id={id} setOpen={setOpen} />
       <AddPost openAdd={openAdd} setOpenAdd={setOpenAdd} userId={state.id} />
     </ScrollView>
@@ -101,7 +104,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderWidth: 1,
     marginBottom: 10,
-    padding:10
+    padding: 10,
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+    width: 100,
   },
 });
 export default Post;

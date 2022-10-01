@@ -20,6 +20,13 @@ const UpdateModal = ({ open, id, setOpen }) => {
   const input = (placeholder, set) => {
     return (
       <TextInput
+        style={{
+          width: 200,
+          textAlign: "center",
+          borderWidth: 1,
+          marginBottom: 10,
+          borderRadius: 10,
+        }}
         placeholder={placeholder}
         onChangeText={(newText) => set(newText)}
       ></TextInput>
@@ -46,26 +53,28 @@ const UpdateModal = ({ open, id, setOpen }) => {
           <View style={styles.modalView}>
             {input("body", setBody)}
             {input("title", setTitle)}
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                Dispatch(updatepost({ body: body, title: title, id }));
-                setOpen(false);
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>update</Text>
-            </Pressable>
+            <View style={styles.buttons}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  Dispatch(updatepost({ body: body, title: title, id }));
+                  setOpen(false);
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>update </Text>
+              </Pressable>
 
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                setOpen(false);
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>close</Text>
-            </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setOpen(false);
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>close</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -85,6 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     padding: 35,
+    height: 200,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -99,20 +109,30 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     elevation: 2,
+    marginBottom: 20,
   },
 
   buttonClose: {
     backgroundColor: "#2196F3",
-    width: 150,
+    width: 100,
+    height: 47,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    height: 150,
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: 220,
+    height: 100,
   },
 });
 

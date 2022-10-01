@@ -19,6 +19,13 @@ const AddPost = ({ openAdd, setOpenAdd, userId }) => {
   const input = (placeholder, set) => {
     return (
       <TextInput
+        style={{
+          width: 200,
+          textAlign: "center",
+          borderWidth: 1,
+          marginBottom: 10,
+          borderRadius: 10,
+        }}
         placeholder={placeholder}
         onChangeText={(newText) => set(newText)}
       ></TextInput>
@@ -42,29 +49,33 @@ const AddPost = ({ openAdd, setOpenAdd, userId }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            {input("body", setBody)}
-            {input("title", setTitle)}
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-
-                Dispatch(
-                  addPost({ body: body, title: title, userId: userId,})
-                );
-                setOpenAdd(false);
-                setModalVisible(!modalVisible);
-
-              }}
-            >
-              <Text style={styles.textStyle}>update post </Text>
-            </Pressable>
-            <Button
-              onPress={() => {
-                setOpenAdd(false);
-                setModalVisible(!modalVisible);
-              }}
-              title="close"
-            />
+            <View style={{ borderRadius: 10 }}>
+              {input("body", setBody)}
+              {input("title", setTitle)}
+            </View>
+            <View style={styles.buttons}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  Dispatch(
+                    addPost({ body: body, title: title, userId: userId })
+                  );
+                  setOpenAdd(false);
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>update</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setOpenAdd(false);
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>close</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -86,6 +97,8 @@ const styles = StyleSheet.create({
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
+    height: 200,
+
     shadowOffset: {
       width: 0,
       height: 2,
@@ -94,17 +107,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
+
   textStyle: {
     color: "white",
     fontWeight: "bold",
@@ -113,6 +116,30 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  button: {
+    borderRadius: 10,
+    padding: 15,
+    elevation: 2,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+    width: 80,
+    height: 50,
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: 210,
+    height: 300,
   },
 });
 
